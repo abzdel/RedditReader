@@ -4,3 +4,4 @@ black==24.8.0
 pytest==8.3.2
 pylint==3.2.7
 replicate
+flask
