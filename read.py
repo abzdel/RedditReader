@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 import logging
 import sys
+import soundfile as sf
+from transformers import pipeline
 
 
 def read_data(url: str) -> pd.DataFrame:
@@ -33,12 +35,23 @@ def get_title(data: dict) -> str:
     return data[0].get("data").get("children")[0].get("data").get("title")
 
 
+def narrate_text(title: str, comments_df: pd.DataFrame, filename: str):
+    # Initialize the Hugging Face TTS pipeline
+    # TODO add comments
+    tts = pipeline("text-to-speech", model="espnet/kan-bayashi_ljspeech_vits")
+
+    # Generate speech from text
+    speech = tts(title)
+
+    # Save the speech audio to a file
+    sf.write(filename, speech["array"], speech["sampling_rate"])
+    logging.info(f"Saved narration to {filename}")
+
+
 def main():
     logging.basicConfig(level=logging.INFO)
-    # TODO change to cmd line input - add .json piece at the end
-    #url = "https://www.reddit.com/r/AskReddit/comments/1f5e6uk/whats_that_one_small_business_local_to_you_that/.json"
+    #example: url = "https://www.reddit.com/r/AskReddit/comments/1f5e6uk/whats_that_one_small_business_local_to_you_that/.json"
 
-    # take url as a flag
     url = sys.argv[1] + ".json"
 
     # get title
@@ -48,7 +61,7 @@ def main():
     df = read_data(url)
     print(df.head())
 
-
+    narrate_text(title, df, "narration.wav")
 
 if __name__ == "__main__":
     main()
