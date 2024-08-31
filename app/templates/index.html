@@ -4,16 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reddit Comment Processor</title>
+    <title>RedditReader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 
 <body>
-    <h1>Reddit Comment Processor</h1>
-    <form action="/process" method="post">
-        <label for="url">Reddit URL:</label>
-        <input type="text" id="url" name="url" placeholder="https://www.reddit.com/r/.../comments/...">
-        <button type="submit">Process</button>
-    </form>
+    <header>
+        <h1>RedditReader</h1>
+    </header>
+    <div class="container">
+        <aside id="sidebar">
+            <button id="toggleSidebar">History</button>
+            <div id="historyContent" class="collapsed">
+                <!-- History content will go here -->
+                <p>No history yet.</p>
+            </div>
+        </aside>
+        <main>
+            <form action="/process" method="POST">
+                <label for="url">Enter URL:</label>
+                <input type="text" id="url" name="url" required>
+                <button type="submit">Process</button>
+            </form>
+        </main>
+    </div>
 </body>
 
 </html>
