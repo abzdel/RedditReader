@@ -1,6 +1,6 @@
 import sys
-from data_handler import read_data, convert_json_to_df, get_title
-from file_manager import save_title_and_comments, clean_df
+from src.data_handler import read_data, convert_json_to_df, get_title
+from src.file_manager import save_title_and_comments, clean_df
 
 def main():
     url = sys.argv[1] + ".json"

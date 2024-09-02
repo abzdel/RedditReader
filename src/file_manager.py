@@ -1,9 +1,21 @@
 import pandas as pd
 from text_to_speech import narrate_text
+import os
+
+def ensure_directory_exists(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 def save_title_and_comments(title: str, df: pd.DataFrame):
+
+    output_dir = os.path.join(os.path.dirname(__file__), 'outputs')
+    ensure_directory_exists(output_dir)
+
     df = df.sort_values(by='score', ascending=False).head(3)
     df = df.reset_index(drop=True)
+    
+    # process title
+    narrate_text(title, "post_title.mp3")
     
     for idx, row in df.iterrows():
         print(f"processing comment_{idx} with text {row['text']}")
