@@ -6,7 +6,7 @@ def read_data(url: str) -> dict:
     if response.status_code == 200:
         return response.json()
     else:
-        raise Exception(f"Failed to read data from {url}")
+        raise Exception(f"Failed to read data from {url}: {response.status_code}")
 
 def convert_json_to_df(data: dict) -> pd.DataFrame:
     comments_df = pd.DataFrame(columns=['author', 'text', 'permalink', 'score'])
