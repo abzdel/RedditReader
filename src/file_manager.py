@@ -24,3 +24,4 @@ def save_title_and_comments(title: str, df: pd.DataFrame):
 def clean_df(df: pd.DataFrame) -> pd.DataFrame:
     df['text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
     return df
+#r8_R9Km07145al6rO6WahRmJK35Pajpszi19L1bM
