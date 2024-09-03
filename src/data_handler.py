@@ -22,3 +22,28 @@ def convert_json_to_df(data: dict) -> pd.DataFrame:
 
 def get_title(data: dict) -> str:
     return data[0].get("data").get("children")[0].get("data").get("title")
+
+def clean_df(df: pd.DataFrame, max_characters: int) -> pd.DataFrame:
+
+    # drop rows where text is > max_characters
+    df = df[df['text'].str.len() <= max_characters]
+
+    # remove URLs from text
+    # TODO consider just deleting these comments - some posts with websites may need the link for context
+    df['text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
+    
+    # Drop rows where 'text' is None
+    df = df.dropna(subset=['text'])
+
+    # if text contains '[deleted]', strip it
+    df = df[~df['text'].str.contains('\[deleted\]')]
+
+    # if text contains ['removed'], strip it
+    df = df[~df['text'].str.contains('\[removed\]')]
+
+    # replace hyphens with commas
+    df['text'] = df['text'].str.replace('-', ',')
+    df['text'] = df['text'].str.replace('*', '')
+
+
+    return df

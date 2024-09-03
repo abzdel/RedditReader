@@ -23,9 +23,13 @@ def save_title_and_comments(title: str, df: pd.DataFrame):
 
 def clean_df(df: pd.DataFrame) -> pd.DataFrame:
     df['text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
+    
+    # Drop rows where 'text' is None
+    df = df.dropna(subset=['text'])
 
     # if text contains '[deleted]', strip it
-    df = df[~df['text'].str.contains('[deleted]')]
+    df = df[~df['text'].str.contains('\[deleted\]')]
+
     # replace hyphens with commas
     df['text'] = df['text'].str.replace('-', ',')
 

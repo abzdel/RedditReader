@@ -15,16 +15,20 @@ def narrate_text(text: str, filename: str):
 
     api = replicate.Client(api_token=os.environ["REPLICATE_API_TOKEN"])
     output = api.run(
-        "lucataco/xtts-v2:684bc3855b37866c0c65add2ff39c78f3dea3f4ff103a436465326e0f438d55e",
-            input={"text": text,
-                "speaker": "https://replicate.delivery/pbxt/Jt79w0xsT64R1JsiJ0LQRL8UcWspg5J4RFrU6YwEKpOT1ukS/male.wav",
-                "cleanup_voice": True}
+    "suno-ai/bark:b76242b40d67c76ab6742e987628a2a9ac019e11d56ab96c4e91ce03b79b2787",
+    input={
+        "prompt": text,
+        "text_temp": 0.9,
+        "output_full": False,
+        "waveform_temp": 0.3,
+        "history_prompt": "announcer"
+    }
         )
     
     # Debugging print
     print(f"Prediction output URL: {output}")
 
-    url = output
+    url = output.get('audio_out')
     if not url:
         raise ValueError("No URL returned from prediction output.")
 

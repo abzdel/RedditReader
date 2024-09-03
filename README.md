@@ -3,6 +3,9 @@
 ## TODO
 
 1. find better voice/text to speech solution
+   - breaking down with longer comments
+   - voice changing in between files
+     - either need a different model, shorter comment filter, or a way to pass things in sentence by sentence
 1. organize output + folder structure to work better for video generation purposes
 1. develop script to pull screenshots of each post thats being read
    - find storage solution for this
