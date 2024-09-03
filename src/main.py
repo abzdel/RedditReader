@@ -11,7 +11,7 @@ def main():
     df = convert_json_to_df(data)
     df = clean_df(df, max_characters=200) # long posts break the TTS model
 
-    save_title_and_comments(title, df)
+    save_title_and_comments(title, df, 'tortoise')
 
 if __name__ == "__main__":
     main()
