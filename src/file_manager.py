@@ -1,12 +1,12 @@
 import pandas as pd
-from text_to_speech import narrate_text
+from text_to_speech import *
 import os
 
 def ensure_directory_exists(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-def save_title_and_comments(title: str, df: pd.DataFrame):
+def save_title_and_comments(title: str, df: pd.DataFrame, model: str):
 
     output_dir = os.path.join(os.path.dirname(__file__), 'outputs')
     ensure_directory_exists(output_dir)
@@ -14,24 +14,21 @@ def save_title_and_comments(title: str, df: pd.DataFrame):
     df = df.sort_values(by='score', ascending=False).head(3)
     df = df.reset_index(drop=True)
     
-    # process title
-    narrate_text(title, "post_title.mp3")
-    
-    for idx, row in df.iterrows():
-        print(f"processing comment_{idx} with text {row['text']}")
-        narrate_text(row['text'], f"comment_{idx}.mp3")
 
-def clean_df(df: pd.DataFrame) -> pd.DataFrame:
-    df['text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
-    
-    # Drop rows where 'text' is None
-    df = df.dropna(subset=['text'])
+    if model == 'eleven_labs':
+        # process title
+        narrate_text_eleven_labs(title, "post_title.mp3")
+        
+        for idx, row in df.iterrows():
+            print(f"processing comment_{idx} with text {row['text']}")
+            narrate_text_eleven_labs(row['text'], f"comment_{idx}.mp3")
+    elif model == 'tortoise':
+        # process title
+        narrate_text_tortoise(title, "post_title.mp3")
+        
+        for idx, row in df.iterrows():
+            print(f"processing comment_{idx} with text {row['text']}")
+            narrate_text_tortoise(row['text'], f"comment_{idx}.mp3")
 
-    # if text contains '[deleted]', strip it
-    df = df[~df['text'].str.contains('\[deleted\]')]
-
-    # replace hyphens with commas
-    df['text'] = df['text'].str.replace('-', ',')
-
-
-    return df
+    else:
+        raise Exception(f"Model {model} not supported or mistyped. Please use 'eleven_labs' or 'tortoise'.")

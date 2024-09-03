@@ -30,7 +30,7 @@ def clean_df(df: pd.DataFrame, max_characters: int) -> pd.DataFrame:
 
     # remove URLs from text
     # TODO consider just deleting these comments - some posts with websites may need the link for context
-    df['text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
+    df.loc[:, 'text'] = df['text'].replace(r'http\S+|www.\S+', '', regex=True)
     
     # Drop rows where 'text' is None
     df = df.dropna(subset=['text'])
