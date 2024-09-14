@@ -25,3 +25,5 @@
    - choose between voices
    - choose historical files more cleanly
 1. (somewhere during these steps) create architectural diagram. probably after the preceding steps, but after creating sqlite database at the earliest
+1. retry connecting to source if failed
+   - error message not specific enough - should differentiate between being rate limited vs other connection errors
