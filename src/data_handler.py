@@ -1,5 +1,8 @@
 import requests
 import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+
 
 def read_data(url: str) -> dict:
     response = requests.get(url)

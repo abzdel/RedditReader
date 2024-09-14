@@ -9,8 +9,10 @@ def ensure_directory_exists(path):
         os.makedirs(path)
 
 
-def narrate_text_eleven_labs(text: str, filename: str):
-    output_dir = os.path.join(os.path.dirname(__file__), 'outputs/')
+def narrate_text_eleven_labs(text: str, filename: str, idx: int = 0):
+    """Convert text to speech and save it as an audio file."""
+    # Create the output directory for the given index
+    output_dir = os.path.join(os.path.dirname(__file__), f'outputs/post_{idx}/')
     ensure_directory_exists(output_dir)
 
     # Define constants for the script
@@ -18,7 +20,7 @@ def narrate_text_eleven_labs(text: str, filename: str):
     XI_API_KEY = os.getenv('ELEVEN_LABS_API_TOKEN')
     VOICE_ID = "pqHfZKP75CvOlQylNhV4"  # ID of the voice model to use
     TEXT_TO_SPEAK = text  # Text you want to convert to speech
-    OUTPUT_PATH = output_dir + filename  # Path to save the output audio file
+    OUTPUT_PATH = os.path.join(output_dir, filename)  # Path to save the output audio file
 
     # Construct the URL for the Text-to-Speech API request
     tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/stream"
@@ -52,10 +54,12 @@ def narrate_text_eleven_labs(text: str, filename: str):
             for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
                 f.write(chunk)
         # Inform the user of success
-        print("Audio stream saved successfully.")
+        print(f"Audio stream saved successfully in {OUTPUT_PATH}.")
     else:
         # Print the error message if the request was not successful
         print(response.text)
+
+
 
 def narrate_text_tortoise(text: str, filename: str):
     output_dir = os.path.join(os.path.dirname(__file__), 'outputs')
@@ -100,6 +104,7 @@ def narrate_text_tortoise(text: str, filename: str):
                 f.write(chunk)
     else:
         print("Failed to download file.")
+
 
 
 def load_mp3_from_url(url):
