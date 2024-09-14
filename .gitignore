@@ -1,6 +1,7 @@
 *.ipynb 
 read.py
 src/outputs/*
+src/screenshots/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
