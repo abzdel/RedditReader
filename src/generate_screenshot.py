@@ -1,18 +1,18 @@
 from PIL import Image, ImageDraw, ImageFont
 
 # Filepath to the base image
-BASE_IMAGE_PATH = "../reddit_template.jfif"
+BASE_IMAGE_PATH = "reddit_template.jfif"
 OUTPUT_IMAGE_PATH = "TEST_IMAGE.png"
 
 # Default font for text overlay (adjust if needed)
-FONT_PATH = "fonts/DejaVuSans-Bold.ttf"  # Adjust path if necessary
-FONT_SIZE_USERNAME = 50
+FONT_PATH = "src/fonts/DejaVuSans-Bold.ttf"  # Adjust path if necessary
+FONT_SIZE_USERNAME = 35
 FONT_SIZE_TITLE = 36
 
 # Coordinates for text placement
 USERNAME_POSITION = (
     170,
-    20,
+    30,
 )  # Initial Y position for username (X will be calculated dynamically)
 TITLE_POSITION = (65, 150)  # Bottom part of the image
 
@@ -114,13 +114,13 @@ def save_image(image, output_path):
         print(f"Error saving image: {e}")
 
 
-def main():
+def generate_screenshot(post_title, username, screenshot_path):
     """
     Main function to generate the Reddit-like post image.
     """
     # Parameters for username and post title
-    username = "u/temp"  # You can customize this
-    post_title = "IT workers of Reddit, can companies track all means of copying data from corporate laptops, specifically online syncing like Google Drive or using Air Drop on Mac?"  # Sample post title, replace as needed
+    # username = "u/temp"  # You can customize this
+    # post_title = "IT workers of Reddit, can companies track all means of copying data from corporate laptops, specifically online syncing like Google Drive or using Air Drop on Mac?"  # Sample post title, replace as needed
 
     # Load base image
     image = load_image(BASE_IMAGE_PATH)
@@ -134,7 +134,11 @@ def main():
     image = add_post_title(image, post_title)
 
     # Save the final image
-    save_image(image, OUTPUT_IMAGE_PATH)
+    save_image(image, screenshot_path)
+
+
+def main():
+    generate_screenshot("title", "username", "/")
 
 
 if __name__ == "__main__":
