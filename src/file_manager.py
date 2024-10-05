@@ -50,7 +50,4 @@ def save_screenshot(title: str, author: str, idx: int):
     screenshot_path = os.path.join(
         output_dir, "title_screenshot.png"
     )  # Define the screenshot filename
-    generate_screenshot(
-        title, author, screenshot_path
-    )  # Call your screenshot generation function
-    print(f"Screenshot saved at: {screenshot_path}")
+    generate_screenshot(title, author, screenshot_path)

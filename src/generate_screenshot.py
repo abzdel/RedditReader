@@ -6,13 +6,13 @@ OUTPUT_IMAGE_PATH = "TEST_IMAGE.png"
 
 # Default font for text overlay (adjust if needed)
 FONT_PATH = "src/fonts/DejaVuSans-Bold.ttf"  # Adjust path if necessary
-FONT_SIZE_USERNAME = 35
+FONT_SIZE_USERNAME = 30
 FONT_SIZE_TITLE = 36
 
 # Coordinates for text placement
 USERNAME_POSITION = (
-    170,
-    30,
+    165,
+    35,
 )  # Initial Y position for username (X will be calculated dynamically)
 TITLE_POSITION = (65, 150)  # Bottom part of the image
 
@@ -114,6 +114,12 @@ def save_image(image, output_path):
         print(f"Error saving image: {e}")
 
 
+def truncate_author(author: str) -> str:
+    if len(author) > 20:
+        return author[:18] + "..."
+    return author
+
+
 def generate_screenshot(post_title, username, screenshot_path):
     """
     Main function to generate the Reddit-like post image.
@@ -126,6 +132,9 @@ def generate_screenshot(post_title, username, screenshot_path):
     image = load_image(BASE_IMAGE_PATH)
     if image is None:
         return  # Exit if image loading failed
+
+    username = truncate_author(username)
+    username = "u/" + username
 
     # Add username to the image
     image = add_username(image, username)
