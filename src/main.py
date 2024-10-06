@@ -23,9 +23,9 @@ def main():
     data = read_data(url)
     title = get_title(data)
     df = convert_json_to_df(data)
-    df = clean_df(df, max_characters=200)  # long posts break the TTS model
+    df = clean_df(df, max_characters=300)  # long posts break the TTS model
 
-    # save_title_and_comments(title, df, "eleven_labs", idx)
+    save_title_and_comments(title, df, "eleven_labs", idx)
     save_screenshot(title, get_author(data), idx)
 
 

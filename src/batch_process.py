@@ -9,7 +9,7 @@ import time
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-def process_subreddit(subreddit: str, num_records_to_get: int = 3):
+def process_subreddit(subreddit: str, num_records_to_get: int = 6):
     df = fetch_hot_posts(subreddit, limit=num_records_to_get)
 
     idx = 0  # init idx, will be incremented for each post
