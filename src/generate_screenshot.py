@@ -6,7 +6,7 @@ BASE_IMAGE_PATH = "../reddit_template.jfif"
 OUTPUT_IMAGE_PATH = "TEST_IMAGE.png"
 
 # Default font for text overlay (adjust if needed)
-FONT_PATH = "src/fonts/DejaVuSans-Bold.ttf"  # Adjust path if necessary
+FONT_PATH = "fonts/DejaVuSans-Bold.ttf"  # Adjust path if necessary
 FONT_SIZE_USERNAME = 30
 FONT_SIZE_TITLE = 36
 
