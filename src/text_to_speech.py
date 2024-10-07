@@ -15,7 +15,7 @@ def narrate_text_eleven_labs(
 ):
     """Convert text to speech and save it as an audio file."""
     # Create the output directory for the given index
-    output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
+    output_dir = os.path.join(f"outputs/post_{idx}/")
     ensure_directory_exists(output_dir)
 
     # Define constants for the script
