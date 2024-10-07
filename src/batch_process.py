@@ -46,7 +46,7 @@ if __name__ == "__main__":
         "--subreddit",
         type=str,
         help="The name of the subreddit to process",
-        required=True,
+        required=False,
     )
 
     parser.add_argument(  # TODO this has a max of 25 right now due to pull_posts limit
@@ -67,6 +67,9 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    if not os.path.exists(args.csv_output_path):
+        os.makedirs(args.csv_output_path)
 
     subreddit_name = args.subreddit
 
