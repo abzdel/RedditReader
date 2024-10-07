@@ -59,6 +59,10 @@ def main():
     df = clean_df(df, max_characters=300)  # long posts break the TTS model
 
     # save title_id to a text file in outputs/post directory
+    # create if not exists
+    if not os.path.exists(f"outputs/post_{idx}/"):
+        os.makedirs(f"outputs/post_{idx}/")
+
     with open(f"outputs/post_{idx}/title_id.txt", "w") as f:
         f.write(title_id)
         print(f"Saved title_id to src/outputs/post_{idx}/title_id.txt")
