@@ -34,7 +34,9 @@ def convert_json_to_df(data: dict) -> pd.DataFrame:
 
 
 def get_title(data: dict) -> str:
-    return data[0].get("data").get("children")[0].get("data").get("title")
+    title = data[0].get("data").get("children")[0].get("data").get("title")
+    title_id = data[0].get("data").get("children")[0].get("data").get("id")
+    return title, title_id
 
 
 def get_author(data: dict) -> str:

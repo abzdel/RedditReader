@@ -21,11 +21,15 @@ def main():
 
     # Get data and process
     data = read_data(url)
-    title = get_title(data)
+    title, title_id = get_title(data)
     df = convert_json_to_df(data)
     df = clean_df(df, max_characters=300)  # long posts break the TTS model
 
-    save_title_and_comments(title, df, "eleven_labs", idx)
+    # save title_id to a text file in outputs/post directory
+    with open(f"src/outputs/post_{idx}/title_id.txt", "w") as f:
+        f.write(title_id)
+
+    # save_title_and_comments(title, df, "eleven_labs", idx)
     # TODO add args for tts model
     # TODO add csv export of df (comments, title, id), voice model
     save_screenshot(title, get_author(data), idx)
