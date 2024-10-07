@@ -53,25 +53,8 @@ def save_screenshot(title: str, author: str, idx: int):
     # Define the output directory for the specific post
     output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
 
-    # Define the screenshot filename
-    screenshot_filename = "title_screenshot.png"
-
-    # Go up one directory level to check for the existing image
-    parent_dir = os.path.dirname(output_dir)
-    existing_image_path = os.path.join(parent_dir, screenshot_filename)
-
-    # Check if the image already exists in the parent directory
-    if os.path.isfile(existing_image_path):
-        print(f"Image already exists: {existing_image_path}")
-        return existing_image_path  # Return the existing image path if found
-
-    # Define the path to save the new screenshot
-    screenshot_path = os.path.join(output_dir, screenshot_filename)
-
-    # Create the output directory if it does not exist
-    os.makedirs(output_dir, exist_ok=True)
-
     # Call the generate_screenshot function and save the result
+    screenshot_path = os.path.join(
+        output_dir, "title_screenshot.png"
+    )  # Define the screenshot filename
     generate_screenshot(title, author, screenshot_path)
-    print(f"Screenshot saved: {screenshot_path}")
-    return screenshot_path  # Return the path where the screenshot was saved
