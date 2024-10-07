@@ -10,7 +10,9 @@ import argparse
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-def process_subreddit(subreddit: str, num_records_to_get: int = 5, csv_output_path: str):
+def process_subreddit(
+    subreddit: str, num_records_to_get: int = 5, csv_output_path: str = ""
+):
     df = fetch_hot_posts(
         subreddit, limit=num_records_to_get
     )  # TODO change this - may pass num_records_to_get
@@ -74,4 +76,8 @@ if __name__ == "__main__":
         subreddit_name = "askreddit"
 
     # take command line input here
-    process_subreddit(subreddit_name, num_records_to_get=args.num_records_to_get, csv_output_path=args.csv_output_path)
+    process_subreddit(
+        subreddit_name,
+        num_records_to_get=args.num_records_to_get,
+        csv_output_path=args.csv_output_path,
+    )
