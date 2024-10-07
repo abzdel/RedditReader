@@ -13,21 +13,22 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 def process_subreddit(
     subreddit: str, num_records_to_get: int = 5, csv_output_path: str = ""
 ):
-    df = fetch_hot_posts(
-        subreddit, limit=num_records_to_get
-    )  # TODO change this - may pass num_records_to_get
+    df = fetch_hot_posts(subreddit, limit=num_records_to_get)
 
     idx = 0  # init idx, will be incremented for each post
 
-    # print pwd
-    print(os.getcwd())
+    # Get the full path to the src directory
+    src_directory = os.path.join(os.getcwd(), "..", "redditreader", "src")
 
     for url in df["url"]:
         print(f"Processing URL: {url}")
         try:
+            # Construct the full path to main.py
+            main_script_path = os.path.join(src_directory, "main.py")
+
             # Directly call the main.py script with the URL as an argument
             result = subprocess.run(
-                ["python", "src/main.py", url, str(idx), csv_output_path],
+                ["python", main_script_path, url, str(idx), csv_output_path],
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
