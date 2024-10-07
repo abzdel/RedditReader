@@ -9,18 +9,25 @@ def ensure_directory_exists(path):
         os.makedirs(path)
 
 
-def save_title_and_comments(title: str, df: pd.DataFrame, model: str, idx: int = 0):
+def save_title_and_comments(
+    title: str,
+    df: pd.DataFrame,
+    model: str,
+    idx: int = 0,
+    model_id="eleven_multilingual_v2",
+    num_comments=3,
+):
     # Define output directory for the specific post
     output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
     ensure_directory_exists(output_dir)
 
     # Sort and reset the DataFrame (keeping top 3 comments)
-    df = df.sort_values(by="score", ascending=False).head(3)
+    df = df.sort_values(by="score", ascending=False).head(num_comments)
     df = df.reset_index(drop=True)
 
     if model == "eleven_labs":
         # Process title
-        narrate_text_eleven_labs(title, "post_title.mp3", idx)
+        narrate_text_eleven_labs(title, "post_title.mp3", idx, model_id)
 
         # Process comments
         for comment_idx, row in df.iterrows():

@@ -10,7 +10,9 @@ def ensure_directory_exists(path):
         os.makedirs(path)
 
 
-def narrate_text_eleven_labs(text: str, filename: str, idx: int = 0):
+def narrate_text_eleven_labs(
+    text: str, filename: str, idx: int = 0, model_id="eleven_multilingual_v2"
+):
     """Convert text to speech and save it as an audio file."""
     # Create the output directory for the given index
     output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
@@ -34,11 +36,11 @@ def narrate_text_eleven_labs(text: str, filename: str, idx: int = 0):
     # Set up the data payload for the API request, including the text and voice settings
     data = {
         "text": TEXT_TO_SPEAK,
-        "model_id": "eleven_multilingual_v2",
+        "model_id": model_id,
         "voice_settings": {
-            "stability": 0.5,
+            "stability": 0.8,
             "similarity_boost": 0.8,
-            "style": 0.0,
+            "style": 0.3,
             "use_speaker_boost": True,
         },
     }

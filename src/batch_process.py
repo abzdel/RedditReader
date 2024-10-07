@@ -10,7 +10,7 @@ import argparse
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-def process_subreddit(subreddit: str, num_records_to_get: int = 5):
+def process_subreddit(subreddit: str, num_records_to_get: int = 5, csv_output_path: str):
     df = fetch_hot_posts(
         subreddit, limit=num_records_to_get
     )  # TODO change this - may pass num_records_to_get
@@ -22,7 +22,7 @@ def process_subreddit(subreddit: str, num_records_to_get: int = 5):
         try:
             # Directly call the main.py script with the URL as an argument
             result = subprocess.run(
-                ["python", "src/main.py", url, str(idx)],
+                ["python", "src/main.py", url, str(idx), csv_output_path],
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
@@ -56,6 +56,15 @@ if __name__ == "__main__":
         default=5,
     )
 
+    # parse arg for csv output oath
+    parser.add_argument(
+        "-o",
+        "--csv_output_path",
+        type=str,
+        help="The path to the output CSV intermediate file.",
+        required=True,
+    )
+
     args = parser.parse_args()
 
     subreddit_name = args.subreddit
@@ -65,4 +74,4 @@ if __name__ == "__main__":
         subreddit_name = "askreddit"
 
     # take command line input here
-    process_subreddit(subreddit_name, num_records_to_get=args.num_records_to_get)
+    process_subreddit(subreddit_name, num_records_to_get=args.num_records_to_get, csv_output_path=args.csv_output_path)
