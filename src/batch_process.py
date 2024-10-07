@@ -19,6 +19,9 @@ def process_subreddit(
 
     idx = 0  # init idx, will be incremented for each post
 
+    # print pwd
+    print(os.getcwd())
+
     for url in df["url"]:
         print(f"Processing URL: {url}")
         try:
