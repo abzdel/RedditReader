@@ -13,7 +13,6 @@ def append_to_csv(post_id, title, num_comments, voice_model, tts_method, output_
         "post_id": post_id,
         "title": title,
         "generation_date": None,
-        "video_len": None,
         "num_comments": num_comments,
         "uploaded": False,  # false, since not uploaded yet
         "uploaded_date": None,
