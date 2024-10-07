@@ -28,11 +28,12 @@ def main():
     # save title_id to a text file in outputs/post directory
     with open(f"src/outputs/post_{idx}/title_id.txt", "w") as f:
         f.write(title_id)
+        print(f"Saved title_id to src/outputs/post_{idx}/title_id.txt")
 
     # save_title_and_comments(title, df, "eleven_labs", idx)
     # TODO add args for tts model
     # TODO add csv export of df (comments, title, id), voice model
-    save_screenshot(title, get_author(data), idx)
+    # save_screenshot(title, get_author(data), idx)
 
 
 if __name__ == "__main__":

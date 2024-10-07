@@ -23,7 +23,7 @@
 
 ### later
 
-1. build frontend (last step for MVP)
+1. build frontend
 1. host app
 1. create sqlite database
    - unique for each user
