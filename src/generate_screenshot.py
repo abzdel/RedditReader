@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+import os
 
 # Filepath to the base image
 BASE_IMAGE_PATH = "reddit_template.jfif"
@@ -128,8 +129,8 @@ def generate_screenshot(post_title, username, screenshot_path):
     # username = "u/temp"  # You can customize this
     # post_title = "IT workers of Reddit, can companies track all means of copying data from corporate laptops, specifically online syncing like Google Drive or using Air Drop on Mac?"  # Sample post title, replace as needed
 
-    # Load base image
-    image = load_image(BASE_IMAGE_PATH)
+    # Load base image from directory above the current one
+    image = load_image(os.path.join(os.path.dirname(__file__), "base.png"))
     if image is None:
         return  # Exit if image loading failed
 
