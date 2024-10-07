@@ -2,6 +2,7 @@ import sys
 from data_handler import read_data, convert_json_to_df, get_title, get_author, clean_df
 from file_manager import save_title_and_comments, save_screenshot
 import csv
+import os
 
 
 def append_to_csv(post_id, title, num_comments, voice_model, tts_method, output_path):
