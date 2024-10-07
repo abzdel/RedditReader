@@ -26,6 +26,8 @@ def main():
     df = clean_df(df, max_characters=300)  # long posts break the TTS model
 
     save_title_and_comments(title, df, "eleven_labs", idx)
+    # TODO add args for tts model
+    # TODO add csv export of df (comments, title, id), voice model
     save_screenshot(title, get_author(data), idx)
 
 

@@ -19,6 +19,7 @@
 1. move frontend to separate repo
 1. decide on reddit post screenshot vs. generating fake one. maybe go back to the verified checkmark being there (removed currently)
    - maybe put the subreddit name instead of author's name if we go with the generated one
+1. parse out more garbage from comments/post strings
 
 ### later
 

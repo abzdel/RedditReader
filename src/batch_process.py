@@ -4,13 +4,16 @@ from pull_posts import *
 import sys
 import io
 import time
+import argparse
 
 # Ensure the default encoding is UTF-8
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
-def process_subreddit(subreddit: str, num_records_to_get: int = 6):
-    df = fetch_hot_posts(subreddit, limit=num_records_to_get)
+def process_subreddit(subreddit: str, num_records_to_get: int = 5):
+    df = fetch_hot_posts(
+        subreddit, limit=num_records_to_get
+    )  # TODO change this - may pass num_records_to_get
 
     idx = 0  # init idx, will be incremented for each post
 
@@ -35,9 +38,31 @@ def process_subreddit(subreddit: str, num_records_to_get: int = 6):
 
 if __name__ == "__main__":
 
-    subreddit_name = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-s",
+        "--subreddit",
+        type=str,
+        help="The name of the subreddit to process",
+        required=False,
+    )
+
+    parser.add_argument(  # TODO this has a max of 25 right now due to pull_posts limit
+        "-n",
+        "--num_records_to_get",
+        type=int,
+        help="The number of records to get from the subreddit",
+        required=False,
+        default=5,
+    )
+
+    args = parser.parse_args()
+
+    subreddit_name = args.subreddit
+
     if not subreddit_name:
-        subreddit_name = "askreddit"  # TODO handle this differently
+        print("No subreddit name provided. Defaulting to 'askreddit'.")
+        subreddit_name = "askreddit"
 
     # take command line input here
-    process_subreddit(subreddit_name)
+    process_subreddit(subreddit_name, num_records_to_get=args.num_records_to_get)
