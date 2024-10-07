@@ -46,7 +46,7 @@ if __name__ == "__main__":
         "--subreddit",
         type=str,
         help="The name of the subreddit to process",
-        required=False,
+        required=True,
     )
 
     parser.add_argument(  # TODO this has a max of 25 right now due to pull_posts limit
@@ -54,8 +54,7 @@ if __name__ == "__main__":
         "--num_records_to_get",
         type=int,
         help="The number of records to get from the subreddit",
-        required=False,
-        default=5,
+        required=True,
     )
 
     # parse arg for csv output oath
