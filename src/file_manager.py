@@ -33,7 +33,9 @@ def save_title_and_comments(
         for comment_idx, row in df.iterrows():
             print(f"Processing comment_{comment_idx} with text: {row['text']}")
             # Here, we pass idx to ensure it's saved in the correct post folder
-            narrate_text_eleven_labs(row["text"], f"comment_{comment_idx}.mp3", idx)
+            narrate_text_eleven_labs(
+                row["text"], f"comment_{comment_idx}.mp3", output_dir, idx, model_id
+            )
     elif model == "tortoise":
         # Process title
         narrate_text_tortoise(title, "post_title.mp3")

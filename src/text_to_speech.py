@@ -49,13 +49,13 @@ def narrate_text_eleven_labs(
     # Check if the request was successful
     if response.ok:
         # Open the output file in write-binary mode
-        with open(os.path.join(str(output_dir), filename), "wb") as f:
+        with open(os.path.join(output_dir, filename), "wb") as f:
             # Read the response in chunks and write to the file
             for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
                 f.write(chunk)
         # Inform the user of success
         print(
-            f"Audio stream saved successfully in {os.path.join(str(output_dir), filename)}."
+            f"Audio stream saved successfully in {os.path.join(output_dir, filename)}."
         )
     else:
         # Print the error message if the request was not successful
