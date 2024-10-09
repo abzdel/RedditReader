@@ -18,7 +18,7 @@ def save_title_and_comments(
     num_comments=3,
 ):
     # Define output directory for the specific post
-    output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
+    output_dir = os.path.join(f"outputs/post_{idx}/")
     ensure_directory_exists(output_dir)
 
     # Sort and reset the DataFrame (keeping top 3 comments)
@@ -27,7 +27,7 @@ def save_title_and_comments(
 
     if model == "eleven_labs":
         # Process title
-        narrate_text_eleven_labs(title, "post_title.mp3", idx, model_id)
+        narrate_text_eleven_labs(title, "post_title.mp3", output_dir, idx, model_id)
 
         # Process comments
         for comment_idx, row in df.iterrows():
@@ -49,9 +49,7 @@ def save_title_and_comments(
     print(f"-----FINISHED PROCESSING POST: {title}-----")
 
 
-def save_screenshot(title: str, author: str, idx: int):
-    # Define the output directory for the specific post
-    output_dir = os.path.join(os.path.dirname(__file__), f"outputs/post_{idx}/")
+def save_screenshot(title: str, author: str, idx: int, output_dir: str):
 
     # Call the generate_screenshot function and save the result
     screenshot_path = os.path.join(

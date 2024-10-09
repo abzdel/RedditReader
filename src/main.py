@@ -61,12 +61,13 @@ def main():
 
     # save title_id to a text file in outputs/post directory
     # create if not exists
+    output_path = f"outputs/post_{idx}/"
     if not os.path.exists(f"outputs/post_{idx}/"):
         os.makedirs(f"outputs/post_{idx}/")
 
-    with open(f"outputs/post_{idx}/title_id.txt", "w") as f:
+    with open(f"{output_path}/title_id.txt", "w") as f:
         f.write(title_id)
-        print(f"Saved title_id to src/outputs/post_{idx}/title_id.txt")
+        print(f"Saved title_id to {output_path}/title_id.txt")
 
     voice_model = "eleven_multilingual_v2"
     tts_method = "eleven_labs"
@@ -79,7 +80,7 @@ def main():
         model_id=voice_model,
         num_comments=num_comments,
     )
-    save_screenshot(title, get_author(data), idx)
+    save_screenshot(title, get_author(data), idx, output_path)
 
     # log data
     append_to_csv(

@@ -11,12 +11,13 @@ def ensure_directory_exists(path):
 
 
 def narrate_text_eleven_labs(
-    text: str, filename: str, idx: int = 0, model_id="eleven_multilingual_v2"
+    text: str,
+    filename: str,
+    output_dir: str,
+    idx: int = 0,
+    model_id="eleven_multilingual_v2",
 ):
     """Convert text to speech and save it as an audio file."""
-    # Create the output directory for the given index
-    output_dir = os.path.join(f"outputs/post_{idx}/")
-    ensure_directory_exists(output_dir)
 
     # Define constants for the script
     CHUNK_SIZE = 1024  # Size of chunks to read/write at a time

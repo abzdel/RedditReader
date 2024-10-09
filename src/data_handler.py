@@ -1,16 +1,21 @@
 import requests
 import pandas as pd
 import warnings
+import time
 
 warnings.filterwarnings("ignore")
 
 
 def read_data(url: str) -> dict:
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        raise Exception(f"Failed to read data from {url}: {response.status_code}")
+    # Read data from the provided URL
+    # infinite loop - retry in 5 seconds if rate limited
+    while True:
+        try:
+            response = requests.get(url)
+            return response.json()
+        except:
+            print("Failed to fetch data from Reddit. Retrying in 5 seconds...")
+            time.sleep(5)
 
 
 def convert_json_to_df(data: dict) -> pd.DataFrame:
@@ -56,10 +61,10 @@ def clean_df(df: pd.DataFrame, max_characters: int) -> pd.DataFrame:
     df = df.dropna(subset=["text"])
 
     # if text contains '[deleted]', strip it
-    df = df[~df["text"].str.contains("\[deleted\]")]
+    df = df[~df["text"].str.contains(r"\[deleted\]")]
 
     # if text contains ['removed'], strip it
-    df = df[~df["text"].str.contains("\[removed\]")]
+    df = df[~df["text"].str.contains(r"\[removed\]")]
 
     # replace hyphens with commas
     df["text"] = df["text"].str.replace("-", ",")
