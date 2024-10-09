@@ -67,8 +67,11 @@ def main():
     except:
         idx = 0
 
-    # get subreddit from command line
-    subreddit = sys.argv[4]
+    # get subreddit from command line optional
+    if len(sys.argv) > 3:
+        subreddit = sys.argv[3]
+    else:
+        subreddit = None
 
     # if no idx is provided, set it to 0
     if not idx:
