@@ -5,7 +5,7 @@ import csv
 import os
 
 
-def append_to_csv(post_id, title, num_comments, voice_model, tts_method, output_path):
+def append_to_csv(post_id, title, num_comments, voice, tts_method, output_path):
     # Specify the file path
     file_path = f"{output_path}/data.csv"
 
@@ -17,7 +17,7 @@ def append_to_csv(post_id, title, num_comments, voice_model, tts_method, output_
         "num_comments": num_comments,
         "uploaded": False,  # false, since not uploaded yet
         "uploaded_date": None,
-        "voice_model": voice_model,
+        "voice_model": voice,
         "tts_method": tts_method,
         "bg_video": None,
     }
@@ -70,6 +70,7 @@ def main():
         print(f"Saved title_id to {output_path}/title_id.txt")
 
     voice_model = "eleven_multilingual_v2"
+    voice = "pqHfZKP75CvOlQylNhV4"
     tts_method = "eleven_labs"
     num_comments = 3
     save_title_and_comments(
@@ -79,6 +80,7 @@ def main():
         idx=idx,
         model_id=voice_model,
         num_comments=num_comments,
+        voice=voice,
     )
     save_screenshot(title, get_author(data), idx, output_path)
 
@@ -87,7 +89,7 @@ def main():
         post_id=title_id,
         title=title,
         num_comments=num_comments,
-        voice_model=voice_model,
+        voice=voice,
         tts_method=tts_method,
         output_path=csv_output_path,
     )

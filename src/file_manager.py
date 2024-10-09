@@ -16,6 +16,7 @@ def save_title_and_comments(
     idx: int = 0,
     model_id="eleven_multilingual_v2",
     num_comments=3,
+    voice="pqHfZKP75CvOlQylNhV4",
 ):
     # Define output directory for the specific post
     output_dir = os.path.join(f"outputs/post_{idx}/")
@@ -27,7 +28,9 @@ def save_title_and_comments(
 
     if model == "eleven_labs":
         # Process title
-        narrate_text_eleven_labs(title, "post_title.mp3", output_dir, idx, model_id)
+        narrate_text_eleven_labs(
+            title, "post_title.mp3", output_dir, idx, model_id, voice
+        )
 
         # Process comments
         for comment_idx, row in df.iterrows():

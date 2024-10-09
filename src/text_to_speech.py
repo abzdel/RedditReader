@@ -16,13 +16,14 @@ def narrate_text_eleven_labs(
     output_dir: str,
     idx: int = 0,
     model_id="eleven_multilingual_v2",
+    voice="pqHfZKP75CvOlQylNhV4",
 ):
     """Convert text to speech and save it as an audio file."""
 
     # Define constants for the script
     CHUNK_SIZE = 1024  # Size of chunks to read/write at a time
     XI_API_KEY = os.getenv("ELEVEN_LABS_API_TOKEN")
-    VOICE_ID = "pqHfZKP75CvOlQylNhV4"  # ID of the voice model to use
+    VOICE_ID = voice  # ID of the voice model to use
     TEXT_TO_SPEAK = text  # Text you want to convert to speech
 
     # Construct the URL for the Text-to-Speech API request
