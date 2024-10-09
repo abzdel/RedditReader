@@ -13,7 +13,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 def process_subreddit(
     subreddit: str, num_records_to_get: int = 5, csv_output_path: str = ""
 ):
-    df = fetch_hot_posts(subreddit, limit=num_records_to_get)
+    df = fetch_posts(subreddit, limit=num_records_to_get)
 
     idx = 0  # init idx, will be incremented for each post
 
@@ -28,7 +28,7 @@ def process_subreddit(
 
             # Directly call the main.py script with the URL as an argument
             result = subprocess.run(
-                ["python", main_script_path, url, str(idx), csv_output_path],
+                ["python", main_script_path, url, str(idx), csv_output_path, subreddit],
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )

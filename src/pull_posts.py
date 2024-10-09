@@ -3,9 +3,9 @@ import pandas as pd
 import time
 
 
-def fetch_hot_posts(subreddit: str, limit: int = 25) -> pd.DataFrame:
+def fetch_posts(subreddit: str, limit: int = 25) -> pd.DataFrame:
     # Construct the URL for the subreddit's "hot" posts in JSON format
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit={limit}"
+    url = f"https://www.reddit.com/r/{subreddit}/top.json?limit={limit}"
     headers = {"User-Agent": "Mozilla/5.0"}
 
     while True:
