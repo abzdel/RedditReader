@@ -24,9 +24,6 @@ def narrate_text_eleven_labs(
     XI_API_KEY = os.getenv("ELEVEN_LABS_API_TOKEN")
     VOICE_ID = "pqHfZKP75CvOlQylNhV4"  # ID of the voice model to use
     TEXT_TO_SPEAK = text  # Text you want to convert to speech
-    OUTPUT_PATH = os.path.join(
-        output_dir, filename
-    )  # Path to save the output audio file
 
     # Construct the URL for the Text-to-Speech API request
     tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/stream"
@@ -52,12 +49,14 @@ def narrate_text_eleven_labs(
     # Check if the request was successful
     if response.ok:
         # Open the output file in write-binary mode
-        with open(OUTPUT_PATH, "wb") as f:
+        with open(os.path.join(str(output_dir), filename), "wb") as f:
             # Read the response in chunks and write to the file
             for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
                 f.write(chunk)
         # Inform the user of success
-        print(f"Audio stream saved successfully in {OUTPUT_PATH}.")
+        print(
+            f"Audio stream saved successfully in {os.path.join(str(output_dir), filename)}."
+        )
     else:
         # Print the error message if the request was not successful
         print(response.text)
