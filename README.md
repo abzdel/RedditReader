@@ -20,6 +20,7 @@
 1. decide on reddit post screenshot vs. generating fake one. maybe go back to the verified checkmark being there (removed currently)
    - maybe put the subreddit name instead of author's name if we go with the generated one
 1. parse out more garbage from comments/post strings
+1. may change the post_idx logic to just have idx be the post id
 
 ### later
 

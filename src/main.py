@@ -116,6 +116,7 @@ def main():
         voice=voice,
     )
     save_screenshot(title, get_author(data), idx, output_path)
+    print(f"-----FINISHED PROCESSING POST: {title}-----")
 
     # log data
     append_to_csv(

@@ -51,7 +51,6 @@ def save_title_and_comments(
         raise Exception(
             f"Model {model} not supported or mistyped. Please use 'eleven_labs' or 'tortoise'."
         )
-    print(f"-----FINISHED PROCESSING POST: {title}-----")
 
 
 def save_screenshot(title: str, author: str, idx: int, output_dir: str):
