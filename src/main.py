@@ -22,7 +22,7 @@ def append_to_csv(
         "uploaded_date": None,
         "voice_model": voice,
         "tts_method": tts_method,
-        "subreddit": None,
+        "subreddit": subreddit,
         "bg_video": None,
     }
 
@@ -36,6 +36,8 @@ def append_to_csv(
 
         # Write the new row
         writer.writerow(new_row)
+
+    print(f"Saved '{title}' to {file_path}.")
 
 
 # function to open up data.csv and pop out any duplicate posts

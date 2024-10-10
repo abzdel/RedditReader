@@ -74,12 +74,15 @@ if __name__ == "__main__":
 
     if not os.path.exists(args.csv_output_path):
         os.makedirs(args.csv_output_path)
+        # delete any files in the directory
+        for f in os.listdir(args.csv_output_path):
+            os.remove(os.path.join(args.csv_output_path, f))
 
     subreddit_name = args.subreddit
 
     if not subreddit_name:
-        print("No subreddit name provided. Defaulting to 'askreddit'.")
-        subreddit_name = "askreddit"
+        print("No subreddit name provided. Defaulting to 'AskReddit'.")
+        subreddit_name = "AskReddit"
 
     # take command line input here
     process_subreddit(

@@ -56,6 +56,20 @@ def add_username(image, username):
     return image
 
 
+def add_subreddit(image, subreddit):
+    """
+    Adds the subreddit to the image at the specified location without dynamic positioning.
+    """
+    draw = ImageDraw.Draw(image)
+    font = load_font(FONT_PATH, FONT_SIZE_USERNAME)
+
+    # Add the subreddit at the predefined position (static placement)
+    draw.text(
+        USERNAME_POSITION, subreddit, font=font, fill=(0, 0, 0)
+    )  # Black text at the fixed USERNAME_POSITION
+    return image
+
+
 def add_post_title(image, post_title):
     """
     Adds the post title to the image at the specified location with text wrapping.
