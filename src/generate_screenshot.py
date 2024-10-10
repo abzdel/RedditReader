@@ -135,7 +135,7 @@ def truncate_author(author: str) -> str:
     return author
 
 
-def generate_screenshot(post_title, username, screenshot_path):
+def generate_screenshot(post_title, subreddit, screenshot_path):
     """
     Main function to generate the Reddit-like post image.
     """
@@ -148,11 +148,11 @@ def generate_screenshot(post_title, username, screenshot_path):
     if image is None:
         return  # Exit if image loading failed
 
-    username = truncate_author(username)
-    username = "u/" + username
+    # username = truncate_author(username)
+    # username = "u/" + username
 
-    # Add username to the image
-    image = add_username(image, username)
+    # Add subreddit to the image
+    image = add_subreddit(image, subreddit)
 
     # Add post title to the image
     image = add_post_title(image, post_title)

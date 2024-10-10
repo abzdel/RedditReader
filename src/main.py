@@ -117,7 +117,7 @@ def main():
         num_comments=num_comments,
         voice=voice,
     )
-    save_screenshot(title, get_author(data), idx, output_path)
+    save_screenshot(title, subreddit, idx, output_path)
     print(f"-----FINISHED PROCESSING POST: {title}-----")
 
     # log data
