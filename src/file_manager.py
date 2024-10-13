@@ -53,10 +53,10 @@ def save_title_and_comments(
         )
 
 
-def save_screenshot(title: str, author: str, idx: int, output_dir: str):
+def save_screenshot(title: str, subreddit: str, idx: int, output_dir: str):
 
     # Call the generate_screenshot function and save the result
     screenshot_path = os.path.join(
         output_dir, "title_screenshot.png"
     )  # Define the screenshot filename
-    generate_screenshot(title, author, screenshot_path)
+    generate_screenshot(title, subreddit, screenshot_path)

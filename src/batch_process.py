@@ -27,8 +27,9 @@ def process_subreddit(
             main_script_path = os.path.join(src_directory, "main.py")
 
             # Directly call the main.py script with the URL as an argument
+            print(f"subreddit during batch process: {subreddit}")
             result = subprocess.run(
-                ["python", main_script_path, url, str(idx), csv_output_path, subreddit],
+                ["python", main_script_path, url, str(idx), subreddit, csv_output_path],
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
@@ -79,6 +80,7 @@ if __name__ == "__main__":
             os.remove(os.path.join(args.csv_output_path, f))
 
     subreddit_name = args.subreddit
+    print(f"subreddit_name: {subreddit_name}")
 
     if not subreddit_name:
         print("No subreddit name provided. Defaulting to 'AskReddit'.")

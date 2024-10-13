@@ -152,6 +152,7 @@ def generate_screenshot(post_title, subreddit, screenshot_path):
     # username = "u/" + username
 
     # Add subreddit to the image
+    print(f"subreddit: {subreddit}")
     image = add_subreddit(image, subreddit)
 
     # Add post title to the image
