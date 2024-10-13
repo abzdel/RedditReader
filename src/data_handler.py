@@ -13,8 +13,8 @@ def read_data(url: str) -> dict:
         try:
             response = requests.get(url)
             return response.json()
-        except:
-            print("Failed to fetch data from Reddit. Retrying in 5 seconds...")
+        except Exception as e:
+            print(f"Failed to fetch data from Reddit. Retrying in 5 seconds... {e}")
             time.sleep(5)
 
 
