@@ -109,15 +109,15 @@ def main():
     voice = "pqHfZKP75CvOlQylNhV4"
     tts_method = "eleven_labs"
     num_comments = 3
-    # save_title_and_comments(
-    #     title=title,
-    #     df=df,
-    #     model=tts_method,
-    #     idx=idx,
-    #     model_id=voice_model,
-    #     num_comments=num_comments,
-    #     voice=voice,
-    # )
+    save_title_and_comments(
+        title=title,
+        df=df,
+        model=tts_method,
+        idx=idx,
+        model_id=voice_model,
+        num_comments=num_comments,
+        voice=voice,
+    )
     save_screenshot(title, subreddit, idx, output_path)
     print(f"-----FINISHED PROCESSING POST: {title}-----")
 
