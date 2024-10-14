@@ -15,15 +15,22 @@ reddit = praw.Reddit(
 
 
 def read_data(url: str) -> dict:
-    # Extract the post ID from the URL
-    post_id = url.split("/")[-2]
-    submission = reddit.submission(id=post_id)
+    while True:
+        submission = reddit.submission(url=url)
+
+        if submission is None:
+            print("Submission not found. Retrying in 5 seconds...")
+            continue
+
+        break
+    print(f"Submission found: {submission.title}")
 
     # Fetch post comments
-    submission.comments.replace_more(limit=None)  # Load all comments
+    submission.comments.replace_more(limit=5)  # Load all comments
 
     # if submission is over18, return None
     if submission.over_18:
+        print("Submission is over 18. Skipping...")
         return None
     return submission
 

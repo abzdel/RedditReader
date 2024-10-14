@@ -28,6 +28,7 @@ def fetch_posts(subreddit: str, limit: int = 25) -> pd.DataFrame:
                     {
                         "title": [post.title],
                         "url": [post.url],
+                        "post_id": [post.id],
                     }
                 ),
             ]

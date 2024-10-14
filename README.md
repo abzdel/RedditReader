@@ -21,6 +21,7 @@
    - maybe put the subreddit name instead of author's name if we go with the generated one
 1. parse out more garbage from comments/post strings
 1. may change the post_idx logic to just have idx be the post id
+1. screenshot mismatch
 
 ### later
 

@@ -67,6 +67,7 @@ def check_for_duplicates(csv_output_path, title_id):
 
 def main():
     # if url ends with a slash, remove it
+    # post_id = sys.argv[1]
     if sys.argv[1][-1] == "/":
         url = sys.argv[1][:-1] + ".json"
     else:
@@ -84,7 +85,7 @@ def main():
         subreddit = None
 
     # if no idx is provided, set it to 0
-    if not idx:
+    if idx is None:
         idx = 0
 
     # arv3 is csv_output_path
@@ -93,9 +94,13 @@ def main():
 
     # Get data and process
     data = read_data(url)
+    print(f"here is the data {data}")
 
     # if data is None, exit
     if data is None:
+        print(
+            "Data is none - either the data doesn't exist or it has been filtered out"
+        )
         return
 
     # get title
@@ -117,7 +122,9 @@ def main():
 
     with open(f"{output_path}/title_id.txt", "w") as f:
         f.write(title_id)
-        print(f"Saved title_id to {output_path}/title_id.txt")
+        print(
+            f"Saved title_id to {output_path}/title_id.txt for {title} with idx {idx}"
+        )
 
     voice_model = "eleven_multilingual_v2"
     voice = "pqHfZKP75CvOlQylNhV4"
@@ -133,7 +140,8 @@ def main():
         voice=voice,
     )
     save_screenshot(title, subreddit, idx, output_path)
-    print(f"-----FINISHED PROCESSING POST: {title}-----")
+    print(f"SAVED SCREENSHOT for {title} with idx {idx}")
+    # print(f"-----FINISHED PROCESSING POST: {title}-----")
 
     # log data
     append_to_csv(
