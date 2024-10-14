@@ -39,13 +39,16 @@ def process_subreddit(
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
-            idx += 1
             time.sleep(2)
             if result.returncode == 0:
-                print(f"Successfully processed post_id: {url}", flush=True)
+                print(
+                    f"Successfully processed post_id: {url} at idx: {idx}. Incrementing idx now",
+                    flush=True,
+                )
+                idx += 1
             else:
                 print(
-                    f"Error processing post_id: {url}. Error: {result.stderr}",
+                    f"Error processing post_id: {url}. Not incrementing idx. Error: {result.stderr}",
                     flush=True,
                 )
         except Exception as e:

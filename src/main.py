@@ -84,24 +84,17 @@ def main():
     else:
         subreddit = None
 
-    # if no idx is provided, set it to 0
-    if idx is None:
-        idx = 0
-
     # arv3 is csv_output_path
     csv_output_path = sys.argv[4]
     # TODO this was causing issues, maybe have a proper argparser for this
 
     # Get data and process
     data = read_data(url)
-    print(f"here is the data {data}")
 
-    # if data is None, exit
+    # if data is None, exit with failure status
+    # this way, we don't increment index in the output directory
     if data is None:
-        print(
-            "Data is none - either the data doesn't exist or it has been filtered out"
-        )
-        return
+        sys.exit(1)
 
     # get title
     title, title_id = get_title(data)
@@ -109,7 +102,6 @@ def main():
     # check for duplicates
     if check_for_duplicates(csv_output_path, title_id):
         print(f"'{title}' already found. Skipping.")
-        return
 
     df = convert_json_to_df(data)
     df = clean_df(df, max_characters=300)  # long posts break the TTS model
