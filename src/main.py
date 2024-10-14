@@ -93,6 +93,12 @@ def main():
 
     # Get data and process
     data = read_data(url)
+
+    # if data is None, exit
+    if data is None:
+        return
+
+    # get title
     title, title_id = get_title(data)
 
     # check for duplicates

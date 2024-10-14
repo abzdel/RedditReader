@@ -21,6 +21,10 @@ def read_data(url: str) -> dict:
 
     # Fetch post comments
     submission.comments.replace_more(limit=None)  # Load all comments
+
+    # if submission is over18, return None
+    if submission.over_18:
+        return None
     return submission
 
 
