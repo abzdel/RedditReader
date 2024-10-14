@@ -18,7 +18,7 @@ def process_subreddit(
     idx = 0  # init idx, will be incremented for each post
 
     # Get the full path to the src directory
-    src_directory = os.path.join(os.getcwd(), "..", "redditreader", "src")
+    src_directory = os.path.join(os.getcwd(), "..", "RedditReader", "src")
 
     for url in df["url"]:
         print(f"Processing URL: {url}", flush=True)
