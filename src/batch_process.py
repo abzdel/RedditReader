@@ -21,13 +21,13 @@ def process_subreddit(
     src_directory = os.path.join(os.getcwd(), "..", "redditreader", "src")
 
     for url in df["url"]:
-        print(f"Processing URL: {url}")
+        print(f"Processing URL: {url}", flush=True)
         try:
             # Construct the full path to main.py
             main_script_path = os.path.join(src_directory, "main.py")
 
             # Directly call the main.py script with the URL as an argument
-            print(f"subreddit during batch process: {subreddit}")
+            print(f"subreddit during batch process: {subreddit}", flush=True)
             result = subprocess.run(
                 ["python", main_script_path, url, str(idx), subreddit, csv_output_path],
                 stdout=sys.stdout,
@@ -36,11 +36,11 @@ def process_subreddit(
             idx += 1
             time.sleep(2)
             if result.returncode == 0:
-                print(f"Successfully processed URL: {url}")
+                print(f"Successfully processed URL: {url}", flush=)
             else:
-                print(f"Error processing URL: {url}. Error: {result.stderr}")
+                print(f"Error processing URL: {url}. Error: {result.stderr}", flush=True)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred: {e}", flush=True)
 
 
 if __name__ == "__main__":
