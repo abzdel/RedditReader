@@ -44,6 +44,6 @@ def fetch_posts(subreddit: str, limit: int = 25) -> pd.DataFrame:
 
 # Example usage:
 if __name__ == "__main__":
-    subreddit_name = "python"  # Replace with your target subreddit
-    top_posts_df = fetch_hot_posts(subreddit_name)
+    subreddit_name = "AskReddit"  # Replace with your target subreddit
+    top_posts_df = fetch_posts(subreddit_name)
     print(top_posts_df)
