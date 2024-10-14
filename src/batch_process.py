@@ -36,9 +36,11 @@ def process_subreddit(
             idx += 1
             time.sleep(2)
             if result.returncode == 0:
-                print(f"Successfully processed URL: {url}", flush=)
+                print(f"Successfully processed URL: {url}", flush=True)
             else:
-                print(f"Error processing URL: {url}. Error: {result.stderr}", flush=True)
+                print(
+                    f"Error processing URL: {url}. Error: {result.stderr}", flush=True
+                )
         except Exception as e:
             print(f"An error occurred: {e}", flush=True)
 

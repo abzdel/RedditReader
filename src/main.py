@@ -1,7 +1,13 @@
 import sys
 
 # from data_handler import read_data, convert_json_to_df, get_title, get_author, clean_df
-from praw_data_handler import *
+from praw_data_handler import (
+    read_data,
+    convert_json_to_df,
+    get_title,
+    get_author,
+    clean_df,
+)
 from file_manager import save_title_and_comments, save_screenshot
 import csv
 import os
