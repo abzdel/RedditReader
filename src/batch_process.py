@@ -1,6 +1,6 @@
 import os
 import subprocess
-from pull_posts import *
+from praw_pull_posts import *
 import sys
 import io
 import time
