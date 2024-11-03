@@ -11,13 +11,15 @@ reddit = praw.Reddit(
 )
 
 
-def fetch_posts(subreddit: str, limit: int = 25) -> pd.DataFrame:
+def fetch_posts(subreddit: str, limit: int = 25, after: str = None) -> pd.DataFrame:
     # Fetch posts from the specified subreddit
     subreddit_instance = reddit.subreddit(subreddit)
-    posts = subreddit_instance.hot(limit=limit)
+    posts = subreddit_instance.hot(
+        limit=limit, params={"after": f"t3_{after}"} if after else None
+    )
 
     # Initialize a DataFrame
-    posts_df = pd.DataFrame(columns=["title", "url"])
+    posts_df = pd.DataFrame(columns=["title", "url", "post_id"])
 
     # Extract relevant information and populate the DataFrame
     for post in posts:

@@ -13,14 +13,19 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 def process_subreddit(
     subreddit: str, num_records_to_get: int = 5, csv_output_path: str = ""
 ):
-    df = fetch_posts(subreddit, limit=num_records_to_get)
+    # Initially fetch more posts than we need to account for skips
+    extra_posts_factor = 2  # Fetch 2x the posts we need to allow for skips
+    df = fetch_posts(subreddit, limit=num_records_to_get * extra_posts_factor)
 
-    idx = 0  # init idx, will be incremented for each post
+    idx = 0  # init idx, will be incremented for each successful post
+    successful_posts = 0  # counter for successful posts
+    post_index = 0  # index for iterating through df
 
     # Get the full path to the src directory
     src_directory = os.path.join(os.getcwd(), "..", "RedditReader", "src")
 
-    for url in df["url"]:
+    while successful_posts < num_records_to_get and post_index < len(df):
+        url = df.iloc[post_index]["url"]
         print(f"Processing url: {url}", flush=True)
         try:
             # Construct the full path to main.py
@@ -46,6 +51,7 @@ def process_subreddit(
                     flush=True,
                 )
                 idx += 1
+                successful_posts += 1
             else:
                 print(
                     f"Error processing post_id: {url}. Not incrementing idx. Error: {result.stderr}",
@@ -53,6 +59,24 @@ def process_subreddit(
                 )
         except Exception as e:
             print(f"An error occurred: {e}", flush=True)
+
+        post_index += 1
+
+        # If we've gone through all posts but haven't got enough, fetch more
+        if post_index >= len(df) and successful_posts < num_records_to_get:
+            print(
+                f"Fetching more posts. Currently have {successful_posts}/{num_records_to_get} successful posts"
+            )
+            new_df = fetch_posts(
+                subreddit,
+                limit=num_records_to_get * extra_posts_factor,
+                after=df.iloc[-1]["post_id"],
+            )
+            if not new_df.empty:
+                df = pd.concat([df, new_df]).reset_index(drop=True)
+            else:
+                print("No more posts available")
+                break
 
 
 if __name__ == "__main__":
