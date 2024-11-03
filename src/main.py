@@ -67,7 +67,6 @@ def check_for_duplicates(csv_output_path, title_id):
 
 def main():
     # if url ends with a slash, remove it
-    # post_id = sys.argv[1]
     if sys.argv[1][-1] == "/":
         url = sys.argv[1][:-1] + ".json"
     else:
@@ -84,17 +83,15 @@ def main():
     else:
         subreddit = None
 
-    # arv3 is csv_output_path
     csv_output_path = sys.argv[4]
-    # TODO this was causing issues, maybe have a proper argparser for this
 
     # Get data and process
     data = read_data(url)
 
-    # if data is None, exit with failure status
-    # this way, we don't increment index in the output directory
+    # Move this check before creating any directories
     if data is None:
-        sys.exit(1)
+        print("Skipping post due to invalid data or over_18 content")
+        sys.exit(1)  # Exit before creating directory
 
     # get title
     title, title_id = get_title(data)
@@ -102,12 +99,12 @@ def main():
     # check for duplicates
     if check_for_duplicates(csv_output_path, title_id):
         print(f"'{title}' already found. Skipping.")
+        sys.exit(1)  # Exit before creating directory
 
     df = convert_json_to_df(data)
-    df = clean_df(df, max_characters=300)  # long posts break the TTS model
+    df = clean_df(df, max_characters=300)
 
-    # save title_id to a text file in outputs/post directory
-    # create if not exists
+    # Only create directory after all checks pass
     output_path = f"outputs/post_{idx}/"
     if not os.path.exists(f"outputs/post_{idx}/"):
         os.makedirs(f"outputs/post_{idx}/")
