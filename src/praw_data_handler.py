@@ -29,9 +29,9 @@ def read_data(url: str) -> dict:
     submission.comments.replace_more(limit=5)  # Load all comments
 
     # if submission is over18, return None
-    if submission.over_18:
-        print("Submission is over 18. Skipping...")
-        return None
+    # if submission.over_18:
+    #     print("Submission is over 18. Skipping...")
+    #     return None
     return submission
 
 
