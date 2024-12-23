@@ -104,10 +104,24 @@ def main():
     df = convert_json_to_df(data)
     df = clean_df(df, max_characters=300)
 
+    # Clear everything in the outputs folder
+    if os.path.exists("outputs"):
+        for filename in os.listdir("outputs"):
+            file_path = os.path.join("outputs", filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print(f'Failed to delete {file_path}. Reason: {e}')
+
     # Only create directory after all checks pass
     output_path = f"outputs/post_{idx}/"
     if not os.path.exists(f"outputs/post_{idx}/"):
         os.makedirs(f"outputs/post_{idx}/")
+
+        
 
     with open(f"{output_path}/title_id.txt", "w") as f:
         f.write(title_id)
