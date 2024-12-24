@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 # Filepath to the base image
-BASE_IMAGE_PATH = "../reddit_template.jfif"
+BASE_IMAGE_PATH = "reddit_template.png"
 OUTPUT_IMAGE_PATH = "TEST_IMAGE.png"
 
 # Default font for text overlay (adjust if needed)

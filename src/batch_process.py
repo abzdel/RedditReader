@@ -5,6 +5,7 @@ import sys
 import io
 import time
 import argparse
+import shutil
 
 # Ensure the default encoding is UTF-8
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
@@ -29,7 +30,7 @@ def process_subreddit(
         print(f"Processing url: {url}", flush=True)
         try:
             # Construct the full path to main.py
-            main_script_path = os.path.join(src_directory, "main.py")
+            main_script_path = os.path.join(os.path.dirname(__file__), "main.py")
 
             # Directly call the main.py script with the URL as an argument
             result = subprocess.run(
@@ -121,6 +122,19 @@ if __name__ == "__main__":
     if not subreddit_name:
         print("No subreddit name provided. Defaulting to 'AskReddit'.")
         subreddit_name = "AskReddit"
+
+
+    # Clear everything in the outputs folder
+    if os.path.exists("outputs"):
+        for filename in os.listdir("outputs"):
+            file_path = os.path.join("outputs", filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print(f'Failed to delete {file_path}. Reason: {e}')
 
     # take command line input here
     process_subreddit(

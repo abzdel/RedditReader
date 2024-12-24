@@ -1,4 +1,5 @@
 import sys
+import shutil
 
 # from data_handler import read_data, convert_json_to_df, get_title, get_author, clean_df
 from praw_data_handler import (
@@ -103,18 +104,6 @@ def main():
 
     df = convert_json_to_df(data)
     df = clean_df(df, max_characters=300)
-
-    # Clear everything in the outputs folder
-    if os.path.exists("outputs"):
-        for filename in os.listdir("outputs"):
-            file_path = os.path.join("outputs", filename)
-            try:
-                if os.path.isfile(file_path):
-                    os.unlink(file_path)
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)
-            except Exception as e:
-                print(f'Failed to delete {file_path}. Reason: {e}')
 
     # Only create directory after all checks pass
     output_path = f"outputs/post_{idx}/"
