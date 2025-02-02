@@ -1,24 +1,25 @@
 import praw
 import pandas as pd
 from typing import Optional
-from config import Config
-
+from .config import Config
 
 class RedditClient:
     """Handles all Reddit API interactions."""
     _instance: Optional['RedditClient'] = None
+    _config: Optional[Config] = None
 
-    def __new__(cls):
+    def __new__(cls, config: Optional[Config] = None):
         """Singleton pattern implementation"""
         if cls._instance is None:
             cls._instance = super().__new__(cls)
+            cls._config = config
         return cls._instance
 
     def __init__(self, config: Optional[Config] = None):
         """Initializes the Reddit client instance if it hasn't been initialized yet."""
         if not hasattr(self, 'reddit'):
             if config is None:
-                config = Config()
+                config = self._config or Config()
             
             self.reddit = praw.Reddit(
                 client_id=config.reddit.client_id,

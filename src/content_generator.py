@@ -3,8 +3,7 @@ import os
 import requests
 from pathlib import Path
 from typing import Optional
-from config import Config
-
+from .config import Config
 
 class ContentGenerator:
     """Handles media generation including screenshots and text-to-speech."""

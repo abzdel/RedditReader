@@ -4,8 +4,7 @@ import csv
 from typing import Optional, Tuple
 from datetime import datetime
 import praw
-from config import Config
-
+from .config import Config
 
 class DataManager:
     """Handles both data processing and file operations."""

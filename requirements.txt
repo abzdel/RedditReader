@@ -6,3 +6,4 @@ pylint==3.2.7
 replicate
 flask
 praw
+python-dotenv
