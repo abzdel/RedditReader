@@ -1,5 +1,9 @@
 # RedditReader
 
+*adding in instructions here - incomplete*
+1) export credentials to environment variables
+   - reddit, eleven labs
+
 ## TODO
 
 1. find better voice/text to speech solution
