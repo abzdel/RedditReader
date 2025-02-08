@@ -4,14 +4,10 @@ import shutil
 from typing import Optional
 import pandas as pd
 import time
-from .config import Config
-from .reddit_client import RedditClient
-from .content_generator import ContentGenerator
-from .data_manager import DataManager
-from dotenv import load_dotenv
-
-load_dotenv()
-
+from config import Config
+from reddit_client import RedditClient
+from content_generator import ContentGenerator
+from data_manager import DataManager
 
 class RedditReader:
     """Main application class that orchestrates the Reddit content processing."""

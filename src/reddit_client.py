@@ -1,7 +1,7 @@
 import praw
 import pandas as pd
 from typing import Optional
-from .config import Config
+from config import Config
 
 class RedditClient:
     """Handles all Reddit API interactions."""

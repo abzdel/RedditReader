@@ -3,7 +3,7 @@ import os
 import requests
 from pathlib import Path
 from typing import Optional
-from .config import Config
+from config import Config
 
 class ContentGenerator:
     """Handles media generation including screenshots and text-to-speech."""
@@ -106,6 +106,9 @@ class ContentGenerator:
         """Adds the post title to the image with text wrapping."""
         draw = ImageDraw.Draw(image)
         font = self._load_font(self.font_size_title)
+        if not font:
+            print("Font file not found.")
+            exit(1)
         
         max_width = image.size[0] - 100
         lines = []
