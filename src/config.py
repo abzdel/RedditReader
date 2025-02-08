@@ -38,8 +38,10 @@ class TTSConfig:
 
 @dataclass
 class ContentConfig:
-    base_image_path: Path = Path("assets/templates/reddit_template.png")
-    font_path: Path = Path("assets/fonts/dejavu-sans-bold.ttf")
+    # TODO: this changes based on where we run it
+    # maybe pass as args to the constructor
+    base_image_path: Path = Path("../RedditReader/assets/templates/reddit_template.png")
+    font_path: Path = Path("../RedditReader/assets/fonts/dejavu-sans-bold.ttf")
     font_size_username: int = 30
     font_size_title: int = 36
     username_position: tuple = (165, 35)

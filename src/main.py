@@ -206,4 +206,5 @@ def main():
 
 
 if __name__ == "__main__":
+    # python src/main.py -p ../redditreader/outputs -bg ../backgroundvideoscraper/downloads -fo final_videos_test/ -co ../redditreader/csv_outputs
     main()
