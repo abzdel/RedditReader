@@ -22,9 +22,9 @@ class RedditReader:
 
     def setup_output_directory(self, csv_output_path: str, clear_outputs: bool = True) -> None:
         """Set up output directories and optionally clear existing outputs."""
-        if clear_outputs and os.path.exists("outputs"):
-            for filename in os.listdir("outputs"):
-                file_path = os.path.join("outputs", filename)
+        if clear_outputs and os.path.exists(csv_output_path):
+            for filename in os.listdir(csv_output_path):
+                file_path = os.path.join(csv_output_path, filename)
                 try:
                     if os.path.isfile(file_path):
                         os.unlink(file_path)
