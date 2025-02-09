@@ -133,10 +133,10 @@ class RedditReader:
             output_dir=post_dir
         )
 
-        for comment_idx, row in comments_df.head(self.config.processing.num_comments).iterrows():
+        for i, (_, row) in enumerate(comments_df.head(self.config.processing.num_comments).iterrows()):
             self.content_generator.generate_audio(
                 text=row["text"],
-                filename=f"comment_{comment_idx}.mp3",
+                filename=f"comment_{i}.mp3",
                 output_dir=post_dir
             )
 
