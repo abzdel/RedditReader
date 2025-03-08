@@ -22,7 +22,7 @@ class RedditConfig:
 class TTSConfig:
     api_token: str = os.environ.get("ELEVEN_LABS_API_TOKEN")
     model_id: str = "eleven_multilingual_v2"
-    voice_id: str = "pqHfZKP75CvOlQylNhV4"
+    voice_id: str = "UEKYgullGqaF0keqT8Bu"
     chunk_size: int = 1024
     voice_settings: dict = None
 
@@ -33,6 +33,7 @@ class TTSConfig:
                 "similarity_boost": 0.8,
                 "style": 0.3,
                 "use_speaker_boost": True,
+                "speed": 1.2
             }
 
 
