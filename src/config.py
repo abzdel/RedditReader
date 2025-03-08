@@ -22,7 +22,7 @@ class RedditConfig:
 class TTSConfig:
     api_token: str = os.environ.get("ELEVEN_LABS_API_TOKEN")
     model_id: str = "eleven_multilingual_v2"
-    voice_id: str = "UEKYgullGqaF0keqT8Bu"
+    voice_id: str = "L0Dsvb3SLTyegXwtm47J"
     chunk_size: int = 1024
     voice_settings: dict = None
 
@@ -51,7 +51,7 @@ class ContentConfig:
 
 @dataclass
 class ProcessingConfig:
-    max_characters: int = 300
+    max_characters: int = 1000
     num_comments: int = 3  # number of top comments to process
     batch_delay: float = 2.0  # delay between processing posts
     posts_buffer_factor: int = 2  # factor to multiply requested posts by to account for skips

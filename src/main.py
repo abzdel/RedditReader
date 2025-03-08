@@ -50,6 +50,9 @@ class RedditReader:
             csv_output_path (Optional[str]): Path to save CSV data
             clear_outputs (bool): Whether to clear existing outputs
         """
+
+        self.data_manager.remove_all_posts_before_processing()
+
         if csv_output_path:
             self.setup_output_directory(csv_output_path, clear_outputs)
 

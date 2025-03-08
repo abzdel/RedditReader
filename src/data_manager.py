@@ -5,6 +5,7 @@ from typing import Optional, Tuple
 from datetime import datetime
 import praw
 from config import Config
+import shutil
 
 class DataManager:
     """Handles both data processing and file operations."""
@@ -87,6 +88,15 @@ class DataManager:
         except Exception as e:
             print(f"Error checking duplicates: {e}")
             return False
+        
+    def remove_all_posts_before_processing(self):
+        """Removes all posts before processing."""
+        # for all folders in the output path
+        for folder in os.listdir(self.base_output_dir):
+            if folder.startswith("post_"):
+                print(f"Removing dir: {folder}")
+                # remove the folder
+                shutil.rmtree(os.path.join(self.base_output_dir, folder))
 
     def save_title_id(self, title_id: str, output_path: str) -> bool:
         """
@@ -119,6 +129,7 @@ class DataManager:
                 "permalink": comment.permalink,
                 "score": comment.score
             })
+
         return pd.DataFrame(comments)
 
     def _clean_comments(self, df: pd.DataFrame, max_characters: int) -> pd.DataFrame:
@@ -148,5 +159,19 @@ class DataManager:
             ~df["text"].str.contains(r"\[deleted\]") & 
             ~df["text"].str.contains(r"\[removed\]")
         ].dropna(subset=["text"])
+
+        # remove newlines
+        df["text"] = df["text"].str.replace("\n", " ")
+
+        # strip
+        df["text"] = df["text"].str.strip()
+
+        df = df.sort_values(by="score", ascending=False)
+
+        # add increasing numbers for each text field, starting from 1 using the rank function
+        df["text_number"] = df['score'].rank(method='first', ascending=False).astype(int)
+        # add text number to the beginning of text
+        df["text"] = df["text_number"].astype(str) + ". " + df["text"]    
+        print(df[['text', 'text_number']])    
         
-        return df.sort_values(by="score", ascending=False)
+        return df
