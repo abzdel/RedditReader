@@ -33,7 +33,7 @@ class TTSConfig:
                 "similarity_boost": 0.8,
                 "style": 0.3,
                 "use_speaker_boost": True,
-                "speed": 1.2
+                "speed": 1.1
             }
 
 
