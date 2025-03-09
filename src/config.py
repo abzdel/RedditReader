@@ -51,7 +51,7 @@ class ContentConfig:
 
 @dataclass
 class ProcessingConfig:
-    max_characters: int = 600
+    max_characters: int = 1000
     num_comments: int = 3  # number of top comments to process
     batch_delay: float = 2.0  # delay between processing posts
     posts_buffer_factor: int = 2  # factor to multiply requested posts by to account for skips
